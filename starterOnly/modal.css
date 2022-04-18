@@ -252,6 +252,11 @@ input[data-error]::after {
   color: red;
 }
 
+.error small{
+  opacity: 1;
+  font-size: 0.6em;
+  color: red;
+}
 .error input{
   border: 2px solid #e54858;
 } 

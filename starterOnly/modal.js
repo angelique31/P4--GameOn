@@ -36,13 +36,15 @@ function closeModal() {
 
 closeBtn.addEventListener("click", closeModal);
 
-//modal de confirmation
-// function launchModal1() {
-//   modalConfirmation.style.display = "block";
-//   spanValidModal.textContent = "merci!"
-// }
+/**********Modal de conformation d'inscription*****/
 
-// btnSubmit.addEventListener('click', launchModal1)
+//modal de confirmation
+function launchModal1() {
+  modalConfirmation.style.display = "block";
+  spanValidModal.textContent = "merci!"
+}
+
+btnSubmit.addEventListener('click', launchModal1)
 
 /****************Le formulaire******************/
 
@@ -50,7 +52,7 @@ closeBtn.addEventListener("click", closeModal);
 form.addEventListener("submit", function (e) {
   //on empêche le rechargement de la page
   e.preventDefault();
-console.log(firstChecker(),lastChecker(),emailChecker());
+
   if (
     firstChecker() === true &&
     lastChecker() === true &&
@@ -60,8 +62,9 @@ console.log(firstChecker(),lastChecker(),emailChecker());
     checkboxChecker() === true &&
     checkboxContainer() === true
   ) {
-    btnSubmit.style.display = "none";
-   
+    //btnSubmit.style.display = "none";
+      document.querySelector(".modal-body").style.display = "none";
+      document.querySelector(".formConfirmation").style.display = "block";
   }
 
   //   vider les champs une fois qu'on a appuyé sur "valider"
@@ -71,8 +74,8 @@ console.log(firstChecker(),lastChecker(),emailChecker());
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
-  console.log(firstContainer);
   const errorDisplay = document.querySelector(".first-container > span");
+
   //Est ce que le prénom fait plus de 0 caractères ou moins de 2 caractères?
   if (value.length > 0 && value.length < 2) {
     firstContainer.classList.add("error");
@@ -130,9 +133,9 @@ const birthdateChecker = (value) => {
 };
 
 //convert today date to input format
-const today = new Date().toISOString().split("T")[0];
-birthdate.value = today;
-birthdate.max = today;
+// const today = new Date().toISOString().split("T")[0];
+// birthdate.value = today;
+// birthdate.max = today;
 
 /*********function quantity ***********/
 const quantityChecker = (value) => {

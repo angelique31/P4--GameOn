@@ -53,31 +53,29 @@ form.addEventListener("submit", function (e) {
   //on empêche le rechargement de la page
   e.preventDefault();
 
-  if (
-    firstChecker() === true &&
-    lastChecker() === true &&
-    emailChecker() === true &&
-    birthdateChecker() === true &&
-    quantityChecker() === true &&
-    checkboxChecker() === true &&
-    checkboxContainer() === true
-  ) {
-    //btnSubmit.style.display = "none";
-      document.querySelector(".modal-body").style.display = "none";
-      document.querySelector(".formConfirmation").style.display = "block";
-  }
-
+  checker()
+  document.querySelector(".modal-body").style.display = "none";
+  document.querySelector(".formConfirmation").style.display = "block";
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });
 
+function checker() {
+  firstChecker()
+  lastChecker() 
+  emailChecker() 
+  birthdateChecker() 
+  quantityChecker() 
+  checkboxChecker()
+  checkboxContainer() 
+}
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
 
   //Est ce que le prénom fait plus de 0 caractères ou moins de 2 caractères?
-  if (value.length > 0 && value.length < 2) {
+  if (value < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
@@ -214,3 +212,5 @@ inputs.forEach((input) => {
     }
   });
 });
+
+

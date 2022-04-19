@@ -41,41 +41,41 @@ closeBtn.addEventListener("click", closeModal);
 //modal de confirmation
 function launchModal1() {
   modalConfirmation.style.display = "block";
-  spanValidModal.textContent = "merci!"
+  spanValidModal.textContent = "merci!";
 }
 
-btnSubmit.addEventListener('click', launchModal1)
+btnSubmit.addEventListener("click", launchModal1);
 
 /****************Le formulaire******************/
-
 
 form.addEventListener("submit", function (e) {
   //on empêche le rechargement de la page
   e.preventDefault();
 
-  checker()
-  document.querySelector(".modal-body").style.display = "none";
-  document.querySelector(".formConfirmation").style.display = "block";
+  if (
+    firstChecker &&
+    lastChecker &&
+    emailChecker &&
+    birthdateChecker &&
+    quantityChecker &&
+    checkboxChecker &&
+    checkboxContainer 
+  ) {
+    document.querySelector(".modal-body").style.display = "none";
+    document.querySelector(".formConfirmation").style.display = "block";
+  }
+
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });
 
-function checker() {
-  firstChecker()
-  lastChecker() 
-  emailChecker() 
-  birthdateChecker() 
-  quantityChecker() 
-  checkboxChecker()
-  checkboxContainer() 
-}
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
 
   //Est ce que le prénom fait plus de 0 caractères ou moins de 2 caractères?
-  if (value < 2) {
+  if (value.length < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
@@ -83,6 +83,7 @@ const firstChecker = (value) => {
     firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on vide le texte qui dit l'erreur
   }
+  return false;
 };
 
 /*********function name (last) ***********/
@@ -98,6 +99,7 @@ const lastChecker = (value) => {
     lastContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on vide le texte qui dit l'erreur
   }
+  return false;
 };
 
 /*********function email ***********/
@@ -112,6 +114,7 @@ const emailChecker = (value) => {
     emailContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
+  return false;
 };
 
 /*********function birthdate ***********/
@@ -120,14 +123,15 @@ const birthdateChecker = (value) => {
   const birthdateContainer = document.querySelector(".birthdate-container");
   const errorDisplay = document.querySelector(".birthdate-container > span");
 
-   //if (!value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
-   if (!value) {
+  //if (!value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
+  if (!value) {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
   } else {
     birthdateContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
+  return false;
 };
 
 //convert today date to input format
@@ -147,6 +151,7 @@ const quantityChecker = (value) => {
     quantityContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
+  return false;
 };
 
 /**********cgv checked*************/
@@ -163,22 +168,23 @@ const checkboxChecker = (value) => {
     check.classList.remove("error");
     errorDisplay.textContent = "";
   }
+  return false;
 };
 
 /*************checkbox************* */
- 
 
 const checkboxContainer = (value) => {
   const errorDisplay = document.querySelector(".formData > small");
-  const checkboxInputs = document.queryselector(".checkbox-inputs")
+  const checkboxInputs = document.queryselector(".checkbox-inputs");
 
   if (!checkboxInputs.checked) {
     checkboxInputs.classList.add("error");
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
   } else {
     errorDisplay.textContent = "";
-  };
-}
+  }
+  return false;
+};
 /********************For each*************/
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
@@ -205,12 +211,10 @@ inputs.forEach((input) => {
       case "checkbox1":
         checkboxChecker(e.target.value);
         break;
-      case ".checkbox-label" :
+      case ".checkbox-label":
         checkboxContainer(e.target.value);
       default:
         nul;
     }
   });
 });
-
-

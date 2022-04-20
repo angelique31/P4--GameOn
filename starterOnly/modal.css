@@ -183,11 +183,23 @@ main {
   color: #fff;
   padding-top: 10px;
 }
-
+/*Formulaire de confirmation*/
 .formConfirmation {
-  padding: 3rem 8%;
-  margin: 15px auto;
+  padding: 20rem 8%;
   display: none;
+}
+
+.btn-submit-confirm{
+  background: #fe142f;
+  display: block;
+  margin: 0 auto;
+  margin-top: 500px;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
 }
 .modal-body {
   padding: 15px 8%;

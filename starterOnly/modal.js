@@ -41,7 +41,7 @@ closeBtn.addEventListener("click", closeModal);
 //modal de confirmation
 function launchModal1() {
   modalConfirmation.style.display = "block";
-  spanValidModal.textContent = "merci!";
+  spanValidModal.textContent = "Merci pour votre inscription";
 }
 
 btnSubmit.addEventListener("click", launchModal1);

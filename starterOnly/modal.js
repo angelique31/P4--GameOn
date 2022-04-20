@@ -50,7 +50,7 @@ btnSubmit.addEventListener("click", launchModal1);
 
 form.addEventListener("submit", function (e) {
   //on empêche le rechargement de la page
-  e.preventDefault();
+   e.preventDefault();
 
   if (
     firstChecker &&
@@ -91,7 +91,7 @@ const lastChecker = (value) => {
   const lastContainer = document.querySelector(".last-container");
   const errorDisplay = document.querySelector(".last-container > span");
 
-  if (value.length > 0 && value.length < 2) {
+  if (value.length < 2) {
     lastContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
@@ -123,7 +123,6 @@ const birthdateChecker = (value) => {
   const birthdateContainer = document.querySelector(".birthdate-container");
   const errorDisplay = document.querySelector(".birthdate-container > span");
 
-  //if (!value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
   if (!value) {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
@@ -173,9 +172,9 @@ const checkboxChecker = (value) => {
 
 /*************checkbox************* */
 
-const checkboxContainer = (value) => {
+const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
-  const checkboxInputs = document.queryselector(".checkbox-inputs");
+  const checkboxInputs = document.queryselector(".input[name=location]:checked");
 
   if (!checkboxInputs.checked) {
     checkboxInputs.classList.add("error");

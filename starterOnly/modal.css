@@ -184,8 +184,15 @@ main {
   padding-top: 10px;
 }
 /*Formulaire de confirmation*/
-.formConfirmation {
-  padding: 20rem 8%;
+
+.formConfirmation{
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: normal;
+  height: 660px;
+  padding-top: 200px;
   display: none;
 }
 
@@ -193,7 +200,7 @@ main {
   background: #fe142f;
   display: block;
   margin: 0 auto;
-  margin-top: 500px;
+  margin-top: 280px;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
@@ -201,6 +208,8 @@ main {
   cursor: pointer;
   border: 0;
 }
+/*Fin de formulaire de confirmation*/
+
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
@@ -253,7 +262,6 @@ input[data-error]::after {
 
 .error span{
   opacity: 1;
-  /* visibility: visible; */
   font-size: 0.6em;
   color: red;
 }
@@ -524,7 +532,7 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 979px) {
   .hero-section {
     display: block;
     box-shadow: unset;

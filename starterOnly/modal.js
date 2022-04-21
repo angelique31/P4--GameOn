@@ -21,6 +21,7 @@ const inputs = document.querySelectorAll(
   "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
 // console.log(inputs)
+
 /*****************Modal*************/
 // open modal
 function launchModal() {
@@ -41,7 +42,7 @@ closeBtn.addEventListener("click", closeModal);
 //modal de confirmation
 function launchModal1() {
   modalConfirmation.style.display = "block";
-  spanValidModal.textContent = "Merci pour votre inscription";
+  spanValidModal.innerHTML = "Merci pour <br> votre inscription";
 }
 
 btnSubmit.addEventListener("click", launchModal1);
@@ -51,7 +52,7 @@ btnSubmit.addEventListener("click", launchModal1);
 form.addEventListener("submit", function (e) {
   
   //on empêche le rechargement de la page
-  // e.preventDefault();
+  e.preventDefault();
 
   if (
     firstChecker &&
@@ -64,9 +65,7 @@ form.addEventListener("submit", function (e) {
   ) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
-  } else {
-    e.preventDefault
-  }
+  } 
 
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
@@ -156,23 +155,6 @@ const quantityChecker = (value) => {
   return false;
 };
 
-/**********cgv checked*************/
-const errorDisplay = document.querySelector(".formData > div");
-const check = document.querySelector(".checkbox1");
-const checkbox1 = document.querySelector("#checkbox1");
-
-const checkboxChecker = (value) => {
-  if (!checkbox1.checked) {
-    check.classList.add("error");
-    errorDisplay.textContent =
-      "Vous devez vérifier que vous acceptez les termes et conditions.";
-  } else {
-    // check.classList.remove("error");
-    errorDisplay.textContent = "";
-  }
-  return false;
-};
-
 /*************checkbox************* */
 
 const checkboxContainer = () => {
@@ -190,6 +172,25 @@ const checkboxContainer = () => {
   }
   return false;
 };
+
+/**********cgv checked*************/
+const errorDisplay = document.querySelector(".formData > div");
+const check = document.querySelector(".checkbox1");
+const checkbox1 = document.querySelector("#checkbox1");
+
+const checkboxChecker = (value) => {
+  if (!checkbox1.checked) {
+    check.classList.add("error");
+    errorDisplay.textContent =
+      "Vous devez vérifier que vous acceptez les termes et conditions.";
+  } else {
+    // check.classList.remove("error");
+    errorDisplay.textContent = "";
+  }
+  return false;
+};
+
+
 /********************For each*************/
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {

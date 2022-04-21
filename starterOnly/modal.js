@@ -37,7 +37,7 @@ function closeModal() {
 
 closeBtn.addEventListener("click", closeModal);
 
-/**********Modal de conformation d'inscription*****/
+/**********Modal de confirmation d'inscription*****/
 
 //modal de confirmation
 function launchModal1() {
@@ -49,34 +49,12 @@ btnSubmit.addEventListener("click", launchModal1);
 
 /****************Le formulaire******************/
 
-form.addEventListener("submit", function (e) {
-  
-  //on empêche le rechargement de la page
-  e.preventDefault();
-
-  if (
-    firstChecker &&
-    lastChecker &&
-    emailChecker &&
-    birthdateChecker &&
-    quantityChecker &&
-    checkboxChecker &&
-    checkboxContainer
-  ) {
-    document.querySelector(".modal-body").style.display = "none";
-    document.querySelector(".formConfirmation").style.display = "block";
-  } 
-
-  //   vider les champs une fois qu'on a appuyé sur "valider"
-  inputs.forEach((input) => (input.value = ""));
-});
-
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
 
-  //Est ce que le prénom fait plus de 0 caractères ou moins de 2 caractères?
+  //Est ce que le prénom fait au moins de 2 caractères?
   if (value.length < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
@@ -112,6 +90,7 @@ const emailChecker = (value) => {
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
+    return 0;
   } else {
     // emailContainer.classList.remove("error");
     errorDisplay.textContent = "";
@@ -132,7 +111,7 @@ const birthdateChecker = (value) => {
     // birthdateContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
-  return false;
+  return false
 };
 
 //convert today date to input format
@@ -152,17 +131,14 @@ const quantityChecker = (value) => {
     // quantityContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
-  return false;
+  return false
 };
 
 /*************checkbox************* */
 
 const checkboxContainer = () => {
-  
   const errorDisplay = document.querySelector(".formData > small");
-  const checkboxInputs = document.queryselector(
-    "input[name=location]:checked"
-  );
+  const checkboxInputs = document.queryselector("input[name=location]:checked");
 
   if (!checkboxInputs.checked) {
     // checkboxInputs.classList.add("error");
@@ -170,7 +146,7 @@ const checkboxContainer = () => {
   } else {
     errorDisplay.textContent = "";
   }
-  return false;
+  return false
 };
 
 /**********cgv checked*************/
@@ -187,15 +163,14 @@ const checkboxChecker = (value) => {
     // check.classList.remove("error");
     errorDisplay.textContent = "";
   }
-  return false;
+  return false
 };
-
 
 /********************For each*************/
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    console.log (e.target.value) //C'est ce qui est tapé dans l'input en temps réel
+    console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
     switch (
       e.target.id //on voit dans quel input on tape les lettres
     ) {
@@ -219,8 +194,29 @@ inputs.forEach((input) => {
         break;
       case "input[name=location]":
         checkboxContainer(e.target.value);
-      default: null;
+      default:
+        null;
     }
   });
 });
 
+form.addEventListener("submit", function (e) {
+  //on empêche le rechargement de la page
+  e.preventDefault();
+
+  if (
+    firstChecker &&
+    lastChecker &&
+    emailChecker &&
+    birthdateChecker &&
+    quantityChecker &&
+    checkboxChecker &&
+    checkboxContainer
+  ) {
+    document.querySelector(".modal-body").style.display = "none";
+    document.querySelector(".formConfirmation").style.display = "block";
+  }
+
+  //   vider les champs une fois qu'on a appuyé sur "valider"
+  inputs.forEach((input) => (input.value = ""));
+});

@@ -1,7 +1,13 @@
+@media screen and (max-width: 1023px) {
+  .btn-signup {
+    margin-top: 45px;
+  }
+}
 @media screen and (max-width: 979px) {
     .hero-section {
       display: block;
       box-shadow: unset;
+      height: auto;
     }
     .hero-content {
       background: #fff;
@@ -29,7 +35,7 @@
     .hero-section > .btn-signup {
       display: block;
       margin: 32px auto 10px;
-      padding: 12px 35px;
+      padding: 15px 60px;
     }
     .copyrights {
       margin-top: 50px;
@@ -68,11 +74,17 @@
       display: block;
       margin-top: -15px;
     }
+    .hero-section > .btn-signup {
+      padding: 15px 30px;
+    }
   }
   
   @media screen and (max-width: 443px) {
     .hero-headline {
       font-size: 4rem;
+    }
+    .hero-section > .btn-signup {
+      padding: 15px 20px;
     }
     .topnav {
       overflow: hidden;

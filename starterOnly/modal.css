@@ -253,7 +253,7 @@ input[data-error]::after {
 
 .error span{
   opacity: 1;
-  /* border: 2px solid #e54858; */
+  /* visibility: visible; */
   font-size: 0.6em;
   color: red;
 }

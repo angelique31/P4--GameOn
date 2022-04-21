@@ -18,9 +18,9 @@ const spanValidModal = document.querySelector(".formConfirmation > span");
 
 //On pointe les inputs
 const inputs = document.querySelectorAll(
-  "#first, #last, #email, #birthdate, #quantity, #checkbox1, .checkbox-label"
+  "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
-
+// console.log(inputs)
 /*****************Modal*************/
 // open modal
 function launchModal() {
@@ -49,8 +49,9 @@ btnSubmit.addEventListener("click", launchModal1);
 /****************Le formulaire******************/
 
 form.addEventListener("submit", function (e) {
+  
   //on empêche le rechargement de la page
-   e.preventDefault();
+  // e.preventDefault();
 
   if (
     firstChecker &&
@@ -59,10 +60,12 @@ form.addEventListener("submit", function (e) {
     birthdateChecker &&
     quantityChecker &&
     checkboxChecker &&
-    checkboxContainer 
+    checkboxContainer
   ) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
+  } else {
+    e.preventDefault
   }
 
   //   vider les champs une fois qu'on a appuyé sur "valider"
@@ -80,8 +83,8 @@ const firstChecker = (value) => {
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
   } else {
-    firstContainer.classList.remove("error");
-    errorDisplay.textContent = ""; //on vide le texte qui dit l'erreur
+    // firstContainer.classList.remove("error");
+    errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
   }
   return false;
 };
@@ -96,7 +99,7 @@ const lastChecker = (value) => {
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   } else {
-    lastContainer.classList.remove("error");
+    // lastContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on vide le texte qui dit l'erreur
   }
   return false;
@@ -111,7 +114,7 @@ const emailChecker = (value) => {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
   } else {
-    emailContainer.classList.remove("error");
+    // emailContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
   return false;
@@ -127,7 +130,7 @@ const birthdateChecker = (value) => {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
   } else {
-    birthdateContainer.classList.remove("error");
+    // birthdateContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
   return false;
@@ -147,7 +150,7 @@ const quantityChecker = (value) => {
     quantityContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer un chiffre.";
   } else {
-    quantityContainer.classList.remove("error");
+    // quantityContainer.classList.remove("error");
     errorDisplay.textContent = "";
   }
   return false;
@@ -164,7 +167,7 @@ const checkboxChecker = (value) => {
     errorDisplay.textContent =
       "Vous devez vérifier que vous acceptez les termes et conditions.";
   } else {
-    check.classList.remove("error");
+    // check.classList.remove("error");
     errorDisplay.textContent = "";
   }
   return false;
@@ -173,11 +176,14 @@ const checkboxChecker = (value) => {
 /*************checkbox************* */
 
 const checkboxContainer = () => {
+  
   const errorDisplay = document.querySelector(".formData > small");
-  const checkboxInputs = document.queryselector(".input[name=location]:checked");
+  const checkboxInputs = document.queryselector(
+    "input[name=location]:checked"
+  );
 
   if (!checkboxInputs.checked) {
-    checkboxInputs.classList.add("error");
+    // checkboxInputs.classList.add("error");
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
   } else {
     errorDisplay.textContent = "";
@@ -188,7 +194,7 @@ const checkboxContainer = () => {
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    //console.log (e.target.value) //C'est ce qui est tapé dans l'input en temps réel
+    console.log (e.target.value) //C'est ce qui est tapé dans l'input en temps réel
     switch (
       e.target.id //on voit dans quel input on tape les lettres
     ) {
@@ -210,10 +216,10 @@ inputs.forEach((input) => {
       case "checkbox1":
         checkboxChecker(e.target.value);
         break;
-      case ".checkbox-label":
+      case "input[name=location]":
         checkboxContainer(e.target.value);
-      default:
-        nul;
+      default: null;
     }
   });
 });
+

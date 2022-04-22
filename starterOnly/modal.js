@@ -82,6 +82,7 @@ const lastChecker = (value) => {
   return false;
 };
 
+
 /*********function email ***********/
 const emailChecker = (value) => {
   const emailContainer = document.querySelector(".email-container");
@@ -217,6 +218,10 @@ form.addEventListener("submit", function (e) {
     document.querySelector(".formConfirmation").style.display = "block";
   }
 
+  if (inputs.forEach(input) === false) {
+    document.querySelector(".modal-body").style.display = "block";
+    document.querySelector(".formConfirmation").style.display = "none";
+  }
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });

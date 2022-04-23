@@ -58,7 +58,7 @@ const firstChecker = (value) => {
   if (value.length < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+      "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   } else {
     // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
@@ -91,7 +91,6 @@ const emailChecker = (value) => {
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
-    return 0;
   } else {
     // emailContainer.classList.remove("error");
     errorDisplay.textContent = "";
@@ -218,10 +217,11 @@ form.addEventListener("submit", function (e) {
     document.querySelector(".formConfirmation").style.display = "block";
   }
 
-  if (inputs.forEach(input) === false) {
-    document.querySelector(".modal-body").style.display = "block";
-    document.querySelector(".formConfirmation").style.display = "none";
-  }
+  // if (inputs.forEach(input) === false) {
+  //   document.querySelector(".modal-body").style.display = "block";
+  //   document.querySelector(".formConfirmation").style.display = "none";
+  // }
+  
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });

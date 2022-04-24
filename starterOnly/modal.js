@@ -10,9 +10,6 @@ function editNav() {
 // DOM Elements
 const form = document.querySelector("form");
 const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const closeBtn = document.querySelector(".close");
-const btnSubmit = document.querySelector(".btn-submit");
 const modalConfirmation = document.querySelector(".formConfirmation");
 const spanValidModal = document.querySelector(".formConfirmation > span");
 
@@ -21,33 +18,6 @@ const inputs = document.querySelectorAll(
   "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
 // console.log(inputs)
-
-/*****************Modal*************/
-// open modal
-function launchModal() {
-  modalbg.style.display = "block"; /*pour faire apparaitre la modale*/
-}
-
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// close modal
-function closeModal() {
-  modalbg.style.display = "none"; /*pour faire disparaitre la modale*/
-}
-
-closeBtn.addEventListener("click", closeModal);
-
-/**********Modal de confirmation d'inscription*****/
-
-//modal de confirmation
-function launchModal1() {
-  modalConfirmation.style.display = "block";
-  spanValidModal.innerHTML = "Merci pour <br> votre inscription";
-}
-
-btnSubmit.addEventListener("click", launchModal1);
-
-/****************Le formulaire******************/
 
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
@@ -217,11 +187,12 @@ form.addEventListener("submit", function (e) {
     document.querySelector(".formConfirmation").style.display = "block";
   }
 
-  // if (inputs.forEach(input) === false) {
+  
+  // if (!inputs.value) {
   //   document.querySelector(".modal-body").style.display = "block";
   //   document.querySelector(".formConfirmation").style.display = "none";
   // }
-  
+
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });

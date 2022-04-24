@@ -19,6 +19,41 @@ const inputs = document.querySelectorAll(
 );
 // console.log(inputs)
 
+/********************For each*************/
+//On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
+inputs.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
+    switch (
+      e.target.id //on voit dans quel input on tape les lettres
+    ) {
+      case "first":
+        firstChecker(e.target.value); //(e.target.value) est le paramètre de la fonction firstChecker
+        break;
+      case "last":
+        lastChecker(e.target.value);
+        break;
+      case "email":
+        emailChecker(e.target.value);
+        break;
+      case "birthdate":
+        birthdateChecker(e.target.value);
+        break;
+      case "quantity":
+        quantityChecker(e.target.value);
+        break;
+      case "checkbox1":
+        checkboxChecker(e.target.value);
+        break;
+      case "input[name=location]":
+        checkboxContainer(e.target.value);
+      default:
+        null;
+    }
+  });
+});
+
+
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
@@ -84,10 +119,6 @@ const birthdateChecker = (value) => {
   return false
 };
 
-//convert today date to input format
-// const today = new Date().toISOString().split("T")[0];
-// birthdate.value = today;
-// birthdate.max = today;
 
 /*********function quantity ***********/
 const quantityChecker = (value) => {
@@ -136,40 +167,7 @@ const checkboxChecker = (value) => {
   return false
 };
 
-/********************For each*************/
-//On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
-inputs.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
-    switch (
-      e.target.id //on voit dans quel input on tape les lettres
-    ) {
-      case "first":
-        firstChecker(e.target.value); //(e.target.value) est le paramètre de la fonction firstChecker
-        break;
-      case "last":
-        lastChecker(e.target.value);
-        break;
-      case "email":
-        emailChecker(e.target.value);
-        break;
-      case "birthdate":
-        birthdateChecker(e.target.value);
-        break;
-      case "quantity":
-        quantityChecker(e.target.value);
-        break;
-      case "checkbox1":
-        checkboxChecker(e.target.value);
-        break;
-      case "input[name=location]":
-        checkboxContainer(e.target.value);
-      default:
-        null;
-    }
-  });
-});
-
+/*********Fonction submit************/
 form.addEventListener("submit", function (e) {
   //on empêche le rechargement de la page
   e.preventDefault();

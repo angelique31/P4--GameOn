@@ -65,6 +65,7 @@ const firstChecker = (value) => {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    
   } else {
     // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
@@ -97,6 +98,7 @@ const emailChecker = (value) => {
   const emailContainer = document.querySelector(".email-container");
   const errorDisplay = document.querySelector(".email-container > span");
   let isValid = false;
+
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
@@ -191,13 +193,13 @@ submitInput.addEventListener("click", function (e) {
   e.preventDefault();
 
   if (
-    firstChecker(value) &&
-    lastChecker(value) &&
-    emailChecker(value) &&
-    birthdateChecker(value) &&
-    quantityChecker(value) &&
-    checkboxChecker(value) &&
-    checkboxContainer(value)
+    firstChecker(e.target.value) &&
+    lastChecker(e.target.value) &&
+    emailChecker(e.target.value) &&
+    birthdateChecker(e.target.value) &&
+    quantityChecker(e.target.value) &&
+    checkboxChecker(e.target.value) &&
+    checkboxContainer(e.target.value)
   ) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";

@@ -58,6 +58,7 @@ inputs.forEach((input) => {
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
+  let isValid = false;
 
   //Est ce que le prénom fait au moins de 2 caractères?
   if (value.length < 2) {
@@ -67,14 +68,16 @@ const firstChecker = (value) => {
   } else {
     // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
+    isValid = true;
   }
-  return false;
+  return isValid;
 };
 
 /*********function name (last) ***********/
 const lastChecker = (value) => {
   const lastContainer = document.querySelector(".last-container");
   const errorDisplay = document.querySelector(".last-container > span");
+  let isValid = false;
 
   if (value.length < 2) {
     lastContainer.classList.add("error");
@@ -83,8 +86,9 @@ const lastChecker = (value) => {
   } else {
     // lastContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on vide le texte qui dit l'erreur
+    isValid = true;
   }
-  return false;
+  return isValid;
 };
 
 
@@ -92,15 +96,16 @@ const lastChecker = (value) => {
 const emailChecker = (value) => {
   const emailContainer = document.querySelector(".email-container");
   const errorDisplay = document.querySelector(".email-container > span");
-
+  let isValid = false;
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
   } else {
     // emailContainer.classList.remove("error");
     errorDisplay.textContent = "";
+    isValid = true;
   }
-  return false;
+  return isValid;
 };
 
 /*********function birthdate ***********/
@@ -108,6 +113,7 @@ const emailChecker = (value) => {
 const birthdateChecker = (value) => {
   const birthdateContainer = document.querySelector(".birthdate-container");
   const errorDisplay = document.querySelector(".birthdate-container > span");
+  let isValid = false;
 
   if (!value) {
     birthdateContainer.classList.add("error");
@@ -115,8 +121,9 @@ const birthdateChecker = (value) => {
   } else {
     // birthdateContainer.classList.remove("error");
     errorDisplay.textContent = "";
+    isValid = true;
   }
-  return false
+  return isValid;
 };
 
 
@@ -124,6 +131,7 @@ const birthdateChecker = (value) => {
 const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
   const errorDisplay = document.querySelector(".quantity-container > span");
+  let isValid = false;
 
   if (!value) {
     quantityContainer.classList.add("error");
@@ -131,29 +139,33 @@ const quantityChecker = (value) => {
   } else {
     // quantityContainer.classList.remove("error");
     errorDisplay.textContent = "";
+    isValid = true;
   }
-  return false
+  return isValid;
 };
 
 /*************checkbox************* */
 
-const checkboxContainer = () => {
+const checkboxContainer = (value) => {
   const errorDisplay = document.querySelector(".formData > small");
   const checkboxInputs = document.queryselector("input[name=location]:checked");
+  let isValid = false;
 
   if (!checkboxInputs.checked) {
     // checkboxInputs.classList.add("error");
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
   } else {
     errorDisplay.textContent = "";
+    isValid = true;
   }
-  return false
+  return isValid;
 };
 
 /**********cgv checked*************/
 const errorDisplay = document.querySelector(".formData > div");
 const check = document.querySelector(".checkbox1");
 const checkbox1 = document.querySelector("#checkbox1");
+let isValid = false;
 
 const checkboxChecker = (value) => {
   if (!checkbox1.checked) {
@@ -163,23 +175,29 @@ const checkboxChecker = (value) => {
   } else {
     // check.classList.remove("error");
     errorDisplay.textContent = "";
+    isValid = true;
   }
-  return false
+  return isValid;
 };
 
+console.log(form[13]);
+const submitInput = form[form.length-1];
+console.log(submitInput);
+
 /*********Fonction submit************/
-form.addEventListener("submit", function (e) {
+submitInput.addEventListener("click", function (e) {
+  console.log('entrée dans le formulaire', e);
   //on empêche le rechargement de la page
   e.preventDefault();
 
   if (
-    firstChecker &&
-    lastChecker &&
-    emailChecker &&
-    birthdateChecker &&
-    quantityChecker &&
-    checkboxChecker &&
-    checkboxContainer
+    firstChecker(value) &&
+    lastChecker(value) &&
+    emailChecker(value) &&
+    birthdateChecker(value) &&
+    quantityChecker(value) &&
+    checkboxChecker(value) &&
+    checkboxContainer(value)
   ) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
@@ -194,3 +212,23 @@ form.addEventListener("submit", function (e) {
   //   vider les champs une fois qu'on a appuyé sur "valider"
   inputs.forEach((input) => (input.value = ""));
 });
+
+// const testSubmit = (e) => {
+//   console.log('entrée dans le formulaire', e);
+//   //on empêche le rechargement de la page
+//   e.preventDefault();
+
+//   if (
+//     firstChecker() &&
+//     lastChecker() &&
+//     emailChecker() &&
+//     birthdateChecker() &&
+//     quantityChecker() &&
+//     checkboxChecker() &&
+//     checkboxContainer()
+//   ) {
+//     console.log('condition vérifiée');
+//     document.querySelector(".modal-body").style.display = "none";
+//     document.querySelector(".formConfirmation").style.display = "block";
+//   }
+// };

@@ -23,7 +23,7 @@ const inputs = document.querySelectorAll(
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
+    // console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
     switch (
       e.target.id //on voit dans quel input on tape les lettres
     ) {
@@ -59,15 +59,15 @@ const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
   let isValid = false;
-  console.log('test du firstchecker', value, errorDisplay);
+  // console.log('test du firstchecker', value, errorDisplay);
 
   //Est ce que le prénom fait au moins de 2 caractères?
   if (value.length < 2) {
-    console.log('error');
+    // console.log('error');
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-      console.log(errorDisplay);
+      // console.log(errorDisplay);
   } else {
     // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
@@ -82,7 +82,7 @@ const lastChecker = (value) => {
   const errorDisplay = document.querySelector(".last-container > span");
   let isValid = false;
 
-  console.log('call avec submit');
+  // console.log('call avec submit');
 
   if (value.length < 2) {
     lastContainer.classList.add("error");
@@ -254,6 +254,9 @@ const onSubmit = (e) => {
   if (formIsValid(formValues(inputs))) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
+  }
+  else {
+    document.querySelector(".formConfirmation").style.display = "none";
   }
 }
 

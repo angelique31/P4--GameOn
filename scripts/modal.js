@@ -59,13 +59,15 @@ const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
   let isValid = false;
+  console.log('test du firstchecker', value, errorDisplay);
 
   //Est ce que le prénom fait au moins de 2 caractères?
   if (value.length < 2) {
+    console.log('error');
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    
+      console.log(errorDisplay);
   } else {
     // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
@@ -79,6 +81,8 @@ const lastChecker = (value) => {
   const lastContainer = document.querySelector(".last-container");
   const errorDisplay = document.querySelector(".last-container > span");
   let isValid = false;
+
+  console.log('call avec submit');
 
   if (value.length < 2) {
     lastContainer.classList.add("error");
@@ -186,34 +190,107 @@ console.log(form[13]);
 const submitInput = form[form.length-1];
 console.log(submitInput);
 
-/*********Fonction submit************/
-submitInput.addEventListener("click", function (e) {
-  console.log('entrée dans le formulaire', e);
-  //on empêche le rechargement de la page
+// TODO: début de la correction
+// J'ai séparé l'add event listener de la fonction pour gagner en lisbilité
+// Faut utiliser la jsDoc
+// Pense à supprimer les consoles.log que tu n'utilises plus
+// Pense à supprimer mes commentaires à supp
+
+/**
+ * Vérifie les inputs du formulaire avant sa soumission
+ * @param {*} e - object event
+ */
+const onSubmit = (e) => {
   e.preventDefault();
 
-  if (
-    firstChecker(e.target.value) &&
-    lastChecker(e.target.value) &&
-    emailChecker(e.target.value) &&
-    birthdateChecker(e.target.value) &&
-    quantityChecker(e.target.value) &&
-    checkboxChecker(e.target.value) &&
-    checkboxContainer(e.target.value)
-  ) {
+  /**
+   * Récupère les valeurs des inputs du formulaire
+   * @param {*} inputs - array: les tags du query selector
+   * @returns - array: les données du query selector
+   */
+  const formValues = (inputs) => {
+    let data = [];
+
+    for (let i = 0; i < inputs.length; i++) {
+      // Com' à sup: on ajoute la donnée uniquement si c'est pas un string
+      if (inputs[i].type === 'text' || inputs[i].type === 'email' || inputs[i].type === 'date' || inputs[i].type === 'number') {
+        data.push(inputs[i].value);
+      }
+      // Com' à sup: on ajoute uniquement si c'un checkbox et que c'checké
+      if (inputs[i].type === 'checkbox') {
+        let currentValue = '';
+  
+        if (inputs[i].checked) {
+          currentValue = inputs[i].value;
+        }
+        data.push(currentValue);
+      }
+      // Com' à sup: pas besoin de le faire pour tes boutons radios. Car ta fonction n'utilise rien en paramètre
+    }
+    return data;
+  }
+
+  /**
+   * Vérifie la valeur de chacun des inputs
+   * @param {*} values - array: les données du query selector
+   * @returns - bool: true si valid
+   */
+  const formIsValid = (values) => {
+    let isValid = false;
+
+    // Com à sup: on teste chacune des valeurs
+    isValid = firstChecker(values[0]);
+    isValid = lastChecker(values[1]);
+    isValid = emailChecker(values[2]);
+    isValid =birthdateChecker(values[3]);
+    isValid =quantityChecker(values[4]);
+    isValid =checkboxChecker(values[5]);
+    isValid = checkboxChecker();
+
+    return isValid;
+  }
+
+  // si Valid
+  if (formIsValid(formValues(inputs))) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
   }
+}
+
+// C'est plus élégant de déclarer ces fonctions d'une part. Et de déclarer ces event listener après.
+submitInput.addEventListener("click", (e) => onSubmit(e));
+
+// Je t'ai gardé la fonction d'origine en dessous pour que tu puisses comparer les deux.
+// TODO: fin de la correction
+
+/*********Fonction submit************/
+// submitInput.addEventListener("click", function (e) {
+//   console.log('entrée dans le formulaire', e);
+//   //on empêche le rechargement de la page
+//   e.preventDefault();
+
+//   if (
+//     firstChecker(e.target.value) &&
+//     lastChecker(e.target.value) &&
+//     emailChecker(e.target.value) &&
+//     birthdateChecker(e.target.value) &&
+//     quantityChecker(e.target.value) &&
+//     checkboxChecker(e.target.value) &&
+//     checkboxContainer(e.target.value)
+//   ) {
+//     document.querySelector(".modal-body").style.display = "none";
+//     document.querySelector(".formConfirmation").style.display = "block";
+//   }
 
   
-  // if (!inputs.value) {
-  //   document.querySelector(".modal-body").style.display = "block";
-  //   document.querySelector(".formConfirmation").style.display = "none";
-  // }
+//   // if (!inputs.value) {
+//   //   document.querySelector(".modal-body").style.display = "block";
+//   //   document.querySelector(".formConfirmation").style.display = "none";
+//   // }
 
-  //   vider les champs une fois qu'on a appuyé sur "valider"
-  inputs.forEach((input) => (input.value = ""));
-});
+//   //   vider les champs une fois qu'on a appuyé sur "valider"
+//   inputs.forEach((input) => (input.value = ""));
+// });
 
 // const testSubmit = (e) => {
 //   console.log('entrée dans le formulaire', e);

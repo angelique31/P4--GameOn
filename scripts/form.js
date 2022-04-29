@@ -17,7 +17,6 @@ const spanValidModal = document.querySelector(".formConfirmation > span");
 const inputs = document.querySelectorAll(
   "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
-// console.log(inputs)
 
 /********************For each*************/
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
@@ -63,13 +62,11 @@ const firstChecker = (value) => {
 
   //Est ce que le prénom fait au moins de 2 caractères?
   if (value.length < 2) {
-    // console.log('error');
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
       // console.log(errorDisplay);
   } else {
-    // firstContainer.classList.remove("error");
     errorDisplay.textContent = ""; //on enlève le texte qui dit l'erreur
     isValid = true;
   }
@@ -210,7 +207,7 @@ const onSubmit = (e) => {
    */
   const formValues = (inputs) => {
     let data = [];
-
+  
     for (let i = 0; i < inputs.length; i++) {
       // Com' à sup: on ajoute la donnée uniquement si c'est pas un string
       if (inputs[i].type === 'text' || inputs[i].type === 'email' || inputs[i].type === 'date' || inputs[i].type === 'number') {
@@ -242,9 +239,9 @@ const onSubmit = (e) => {
     isValid = firstChecker(values[0]);
     isValid = lastChecker(values[1]);
     isValid = emailChecker(values[2]);
-    isValid =birthdateChecker(values[3]);
-    isValid =quantityChecker(values[4]);
-    isValid =checkboxChecker(values[5]);
+    isValid = birthdateChecker(values[3]);
+    isValid = quantityChecker(values[4]);
+    isValid = checkboxChecker(values[5]);
     isValid = checkboxChecker();
 
     return isValid;

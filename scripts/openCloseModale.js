@@ -5,7 +5,8 @@ function launchModal() {
     modalbg.style.display = "block"; /*pour faire apparaitre la modale*/
   }
   
-  modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+ 
   
   // close modal
   function closeModal() {

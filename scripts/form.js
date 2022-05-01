@@ -144,9 +144,9 @@ const quantityChecker = (value) => {
 /*************checkbox************* */
 
 const checkboxContainer = () => {
-  const errorDisplay = document.querySelector(".formData > small");
+   errorDisplay = document.querySelector(".formData > small");
   const checkboxInputs = document.queryselector("input[name=location]:checked");
-  let isValid = false;
+   isValid = false;
 
   if (!checkboxInputs.checked) {
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
@@ -156,6 +156,7 @@ const checkboxContainer = () => {
   }
   return isValid;
 };
+
 
 /**********cgv checked*************/
 const errorDisplay = document.querySelector(".formData > div");

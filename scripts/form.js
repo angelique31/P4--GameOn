@@ -143,12 +143,10 @@ const quantityChecker = (value) => {
 const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
   const radios = document.querySelector('input[name = "location"]:checked');
-  const checkboxInput = document.querySelector ("checkbox-inputs")
   
   isValid = false;
 
   if (!radios != null) {
-    // checkboxInput.classList.add("error");
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
     errorDisplay.style.color = "red";
     errorDisplay.style.fontSize = "0.6em"
@@ -231,16 +229,18 @@ const onSubmit = (e) => {
     isValid = lastChecker(values[1]);
     isValid = emailChecker(values[2]);
     isValid = birthdateChecker(values[3]);
+    //  console.log(isValid);
     isValid = quantityChecker(values[4]);
     // console.log(isValid);
     isValid = checkboxChecker(values[5]);
     // console.log(isValid);
     isValid = checkboxContainer();
-    // console.log(isValid);
+    console.log(isValid);
+
     return isValid;
   };
-  console.log("formValue", formValues(inputs));
-  console.log("formIsValid", formIsValid(formValues(inputs)));
+  // console.log("formValue", formValues(inputs));
+  // console.log("formIsValid", formIsValid(formValues(inputs)));
   // si Valid
   if (formIsValid(formValues(inputs))) {
     document.querySelector(".modal-body").style.display = "none";

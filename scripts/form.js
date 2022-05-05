@@ -12,7 +12,7 @@ const form = document.querySelector("form");
 const modalbg = document.querySelector(".bground");
 const modalConfirmation = document.querySelector(".formConfirmation");
 const spanValidModal = document.querySelector(".formConfirmation > span");
-const submitInput = form[form.length-1];
+const submitInput = form[form.length - 1];
 
 //On pointe les inputs
 const inputs = document.querySelectorAll(
@@ -28,7 +28,7 @@ inputs.forEach((input) => {
       e.target.id //on voit dans quel input on tape les lettres
     ) {
       case "first":
-        firstChecker(e.target.value); 
+        firstChecker(e.target.value);
         break;
       case "last":
         lastChecker(e.target.value);
@@ -52,7 +52,6 @@ inputs.forEach((input) => {
     }
   });
 });
-
 
 /*********function firstname (first) ***********/
 const firstChecker = (value) => {
@@ -84,12 +83,11 @@ const lastChecker = (value) => {
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   } else {
     lastContainer.classList.remove("error");
-    errorDisplay.textContent = ""; 
+    errorDisplay.textContent = "";
     isValid = true;
   }
   return isValid;
 };
-
 
 /*********function email ***********/
 const emailChecker = (value) => {
@@ -124,7 +122,6 @@ const birthdateChecker = (value) => {
   return isValid;
 };
 
-
 /*********function quantity ***********/
 const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
@@ -144,27 +141,34 @@ const quantityChecker = (value) => {
 /*************checkbox************* */
 
 const checkboxContainer = () => {
-   errorDisplay = document.querySelector(".formData > small");
-  const checkboxInputs = document.queryselector("input[name=location]:checked");
-   isValid = false;
+  const errorDisplay = document.querySelector(".formData > small");
+  const radios = document.querySelector('input[name = "location"]:checked');
+  const checkboxInput = document.querySelector ("checkbox-inputs")
+  
+  isValid = false;
 
-  if (!checkboxInputs.checked) {
+  if (!radios != null) {
+    // checkboxInput.classList.add("error");
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
-  } else {
-    errorDisplay.textContent = "";
-    isValid = true;
+    errorDisplay.style.color = "red";
+    errorDisplay.style.fontSize = "0.6em"
+    } else {
+      errorDisplay.textContent = "";
+      isValid = true;
+    }
+    return isValid;
   }
-  return isValid;
-};
 
 
 /**********cgv checked*************/
-const errorDisplay = document.querySelector(".formData > div");
-const check = document.querySelector(".checkbox1");
-const checkbox1 = document.querySelector("#checkbox1");
-let isValid = false;
 
 const checkboxChecker = () => {
+  const errorDisplay = document.querySelector(".formData > div");
+  const check = document.querySelector(".checkbox1");
+  const checkbox1 = document.querySelector("#checkbox1");
+  let isValid = false;
+  console.log(checkbox1);
+  
   if (!checkbox1.checked) {
     check.classList.add("error");
     errorDisplay.textContent =
@@ -175,7 +179,6 @@ const checkboxChecker = () => {
   }
   return isValid;
 };
-
 
 /**
  * Vérifier les inputs du formulaire avant sa soumission
@@ -191,26 +194,30 @@ const onSubmit = (e) => {
    */
   const formValues = (inputs) => {
     let data = [];
-  
+
     for (let i = 0; i < inputs.length; i++) {
-    // console.log(i)  //11 inputs
-    // console.log(inputs[i])
-      if (inputs[i].type === 'text' || inputs[i].type === 'email' || inputs[i].type === 'date' || inputs[i].type === 'number') {
+      // console.log(i)  //11 inputs
+      // console.log(inputs[i])
+      if (
+        inputs[i].type === "text" ||
+        inputs[i].type === "email" ||
+        inputs[i].type === "date" ||
+        inputs[i].type === "number"
+      ) {
         data.push(inputs[i].value);
       }
-      
-      if (inputs[i].type === 'checkbox') {
-        let currentValue = '';
-       
+
+      if (inputs[i].type === "checkbox") {
+        let currentValue = "";
+
         if (inputs[i].checked) {
           currentValue = inputs[i].value;
         }
         data.push(currentValue);
       }
-      
     }
     return data;
-  }
+  };
 
   /**
    * Vérifie la valeur de chacun des inputs
@@ -225,22 +232,22 @@ const onSubmit = (e) => {
     isValid = emailChecker(values[2]);
     isValid = birthdateChecker(values[3]);
     isValid = quantityChecker(values[4]);
+    // console.log(isValid);
     isValid = checkboxChecker(values[5]);
-    isValid = checkboxChecker();
-
+    // console.log(isValid);
+    isValid = checkboxContainer();
+    // console.log(isValid);
     return isValid;
-  }
-
+  };
+  console.log("formValue", formValues(inputs));
+  console.log("formIsValid", formIsValid(formValues(inputs)));
   // si Valid
   if (formIsValid(formValues(inputs))) {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
-  }
-  else {
+  } else {
     document.querySelector(".formConfirmation").style.display = "none";
   }
-}
-
+};
 
 submitInput.addEventListener("click", (e) => onSubmit(e));
-

@@ -142,11 +142,10 @@ const quantityChecker = (value) => {
 
 const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
-  const radios = document.querySelector('input[name = "location"]:checked');
-  
+  const radios = document.querySelectorAll('input[name = "location"]:checked');
   isValid = false;
 
-  if (!radios != null) {
+  if (!(radios.length)) {
     errorDisplay.textContent = "Veuillez sélectionner un choix.";
     errorDisplay.style.color = "red";
     errorDisplay.style.fontSize = "0.6em"

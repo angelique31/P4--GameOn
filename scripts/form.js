@@ -44,9 +44,9 @@ inputs.forEach((input) => {
         break;
       case "checkbox1":
         checkboxChecker(e.target.value);
-        break;
-      case "input[name=location]":
-        checkboxContainer(e.target.value);
+      //   break;
+      // case "input[name=location]":
+      //   checkboxContainer(e.target.value);
       default:
         null;
     }
@@ -64,10 +64,12 @@ const firstChecker = (value) => {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
+  // on renvoie true à destination du test de validation lors du submit
   return isValid;
 };
 
@@ -127,14 +129,16 @@ const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
   const errorDisplay = document.querySelector(".quantity-container > span");
   let isValid = false;
-
+  //Si on ne met aucunes valeures dans l'input, faire apparaitre un message d'erreur, et renvoyer false
   if (!value) {
     quantityContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer un chiffre.";
+    //Si on met un chiffre compris entre 0 et 99, enlever le message d'erreur et renvoyer true
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
+  // IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -142,19 +146,25 @@ const quantityChecker = (value) => {
 
 const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
-  const radios = document.querySelectorAll('input[name = "location"]:checked');
+  const radios = document.querySelectorAll('input[name = "location"]');
+  // console.log(radios)
   isValid = false;
 
-  if (!(radios.length)) {
-    errorDisplay.textContent = "Veuillez sélectionner un choix.";
+  //La boucle s'execute autant de fois qu'il y a de boutons radios
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      isValid = true
+    } else {
+      errorDisplay.textContent = "Veuillez sélectionner un choix.";
     errorDisplay.style.color = "red";
     errorDisplay.style.fontSize = "0.6em"
-    } else {
-      errorDisplay.textContent = "";
-      isValid = true;
     }
-    return isValid;
+    console.log(radios[i])
   }
+  return isValid;
+
+  
+}
 
 
 /**********cgv checked*************/
@@ -195,23 +205,26 @@ const onSubmit = (e) => {
     for (let i = 0; i < inputs.length; i++) {
       // console.log(i)  //11 inputs
       // console.log(inputs[i])
+      //On vérifie si au moins une des conditions est vrai avec l'opérateur logique ou ||
       if (
         inputs[i].type === "text" ||
         inputs[i].type === "email" ||
         inputs[i].type === "date" ||
-        inputs[i].type === "number"
+        inputs[i].type === "number" 
       ) {
+        // On ajoute la valeur des inputs à la fin du tableau nommé data grâce à la méthode .push 
         data.push(inputs[i].value);
+        // console.log(inputs[i].value)
       }
 
-      if (inputs[i].type === "checkbox") {
-        let currentValue = "";
+      // if (inputs[i].type === "checkbox") {
+      //   let currentValue = "";
 
-        if (inputs[i].checked) {
-          currentValue = inputs[i].value;
-        }
-        data.push(currentValue);
-      }
+      //   if (inputs[i].checked) {
+      //     currentValue = inputs[i].value;
+      //   }
+      //   data.push(currentValue);
+      // }
     }
     return data;
   };
@@ -224,11 +237,12 @@ const onSubmit = (e) => {
   const formIsValid = (values) => {
     let isValid = false;
 
+    // On indique si la valeur de l'input est valide ou non, en accédant à la valeur de l'input vià l'index du tableau
     isValid = firstChecker(values[0]);
     isValid = lastChecker(values[1]);
     isValid = emailChecker(values[2]);
     isValid = birthdateChecker(values[3]);
-    //  console.log(isValid);
+    // console.log(isValid);
     isValid = quantityChecker(values[4]);
     // console.log(isValid);
     isValid = checkboxChecker(values[5]);

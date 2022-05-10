@@ -9,10 +9,10 @@ function editNav() {
 
 // DOM Elements
 const form = document.querySelector("form");
-const modalbg = document.querySelector(".bground");
-const modalConfirmation = document.querySelector(".formConfirmation");
-const spanValidModal = document.querySelector(".formConfirmation > span");
+
+//On pointe le bouton de soumission du formulaire "c'est parti"
 const submitInput = form[form.length - 1];
+// console.log(submitInput)
 
 //On pointe les inputs
 const inputs = document.querySelectorAll(
@@ -23,6 +23,7 @@ const inputs = document.querySelectorAll(
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
+    console.log (e)
     // console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
     switch (
       e.target.id //on voit dans quel input on tape les lettres
@@ -44,9 +45,6 @@ inputs.forEach((input) => {
         break;
       case "checkbox1":
         checkboxChecker(e.target.value);
-      //   break;
-      // case "input[name=location]":
-      //   checkboxContainer(e.target.value);
       default:
         null;
     }
@@ -64,12 +62,12 @@ const firstChecker = (value) => {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
+    // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
-  // on renvoie true à destination du test de validation lors du submit
+  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -79,15 +77,18 @@ const lastChecker = (value) => {
   const errorDisplay = document.querySelector(".last-container > span");
   let isValid = false;
 
+  //Si le nom fait moins de 2 caractères, on met un message d'erreur
   if (value.length < 2) {
     lastContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     lastContainer.classList.remove("error");
     errorDisplay.textContent = "";
     isValid = true;
   }
+  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -97,13 +98,16 @@ const emailChecker = (value) => {
   const errorDisplay = document.querySelector(".email-container > span");
   let isValid = false;
 
+  //Si ce qui est tapé dans l'input de l'email est différent du regex ci dessous, on affiche un message d'erreur
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
   } else {
+    //Si ce qui est tapé dans l'input de l'email correspond au regex ci dessus, on enlève le message d'erreur
     errorDisplay.textContent = "";
     isValid = true;
   }
+  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -114,13 +118,16 @@ const birthdateChecker = (value) => {
   const errorDisplay = document.querySelector(".birthdate-container > span");
   let isValid = false;
 
+  //Si aucune date de naissance n'est affichée, on affiche le message d'erreur
   if (!value) {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
+    //Si on met une date de naissance, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
+  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -153,19 +160,16 @@ const checkboxContainer = () => {
   //La boucle s'execute autant de fois qu'il y a de boutons radios
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
-      isValid = true
+      isValid = true;
     } else {
       errorDisplay.textContent = "Veuillez sélectionner un choix.";
-    errorDisplay.style.color = "red";
-    errorDisplay.style.fontSize = "0.6em"
+      errorDisplay.style.color = "red";
+      errorDisplay.style.fontSize = "0.6em";
     }
-    console.log(radios[i])
+    // console.log(radios[i])
   }
   return isValid;
-
-  
-}
-
+};
 
 /**********cgv checked*************/
 
@@ -174,16 +178,19 @@ const checkboxChecker = () => {
   const check = document.querySelector(".checkbox1");
   const checkbox1 = document.querySelector("#checkbox1");
   let isValid = false;
-  console.log(checkbox1);
-  
+  // console.log(checkbox1);
+
+  //Si la checkbox des CGU n'est pas cochée, on affiche le message d'erreur
   if (!checkbox1.checked) {
     check.classList.add("error");
     errorDisplay.textContent =
       "Vous devez vérifier que vous acceptez les termes et conditions.";
+    //Si la chekbox des CGU est cochée, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
+  // IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -202,33 +209,38 @@ const onSubmit = (e) => {
   const formValues = (inputs) => {
     let data = [];
 
+    //La boucle s'execute autant de fois qu'il y a d'inputs
     for (let i = 0; i < inputs.length; i++) {
-      // console.log(i)  //11 inputs
+      //  console.log(i)  //11 inputs
       // console.log(inputs[i])
       //On vérifie si au moins une des conditions est vrai avec l'opérateur logique ou ||
       if (
         inputs[i].type === "text" ||
         inputs[i].type === "email" ||
         inputs[i].type === "date" ||
-        inputs[i].type === "number" 
+        inputs[i].type === "number"
       ) {
-        // On ajoute la valeur des inputs à la fin du tableau nommé data grâce à la méthode .push 
+        // On ajoute la valeur des inputs à la fin du tableau nommé data grâce à la méthode .push
         data.push(inputs[i].value);
-        // console.log(inputs[i].value)
+        // console.log(inputs[i].value);
       }
 
-      // if (inputs[i].type === "checkbox") {
-      //   let currentValue = "";
-
-      //   if (inputs[i].checked) {
-      //     currentValue = inputs[i].value;
-      //   }
-      //   data.push(currentValue);
-      // }
+      
+      if (inputs[i].type === "checkbox") {
+        let currentValue = "";
+        
+        if (inputs[i].checked) {
+          currentValue = inputs[i].value;
+        }
+        data.push(currentValue);
+      }
+      // On pointe les 6 villes :
+      // console.log(inputs[i].value)
     }
+    //on retourne un tableau 
     return data;
   };
-
+  
   /**
    * Vérifie la valeur de chacun des inputs
    * @param {*} values - array: les données du query selector
@@ -250,10 +262,12 @@ const onSubmit = (e) => {
     isValid = checkboxContainer();
     console.log(isValid);
 
+    //isValid est true si toutes les fonctions renvoient true
     return isValid;
   };
   // console.log("formValue", formValues(inputs));
   // console.log("formIsValid", formIsValid(formValues(inputs)));
+
   // si Valid
   if (formIsValid(formValues(inputs))) {
     document.querySelector(".modal-body").style.display = "none";
@@ -264,3 +278,5 @@ const onSubmit = (e) => {
 };
 
 submitInput.addEventListener("click", (e) => onSubmit(e));
+// console.log(submitInput)
+// console.log(onSubmit)

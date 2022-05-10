@@ -23,6 +23,7 @@
     .hero-headline {
       font-size: 4.5rem;
       white-space: normal;
+      font-weight: 700;
     }
     .hero-text {
       width: unset;
@@ -30,7 +31,7 @@
     }
     .hero-img img {
       border-radius: 10px;
-      margin-top: 40px;
+      margin-top: 20px;
     }
     .hero-section > .btn-signup {
       display: block;
@@ -38,7 +39,7 @@
       padding: 15px 60px;
     }
     .copyrights {
-      margin-top: 50px;
+      margin-top: 20px;
       text-align: center;
     }
   }
@@ -51,9 +52,6 @@
       float: right;
       display: block;
     }
-  }
-  
-  @media screen and (max-width: 768px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
@@ -65,23 +63,67 @@
       display: block;
       text-align: left;
     }
+    .topnav a.icon {
+      margin-top: -10px;
+      color: red;
+    }
+    img{
+      width: 70%;
+    }
+    .hero-headline {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .hero-text {
+      font-size: 1.2rem;
+      margin-top: 30px;
+    }
   }
   
+  @media screen and (max-width: 602px) {
+    .hero-headline {
+      font-size: 3rem;
+      white-space: normal;
+    }
+    .hero-text {
+      font-size: 1.1rem;
+    }
+    
+  }
+ 
+    
    @media screen and (max-width: 540px) {
     .topnav a {display: none;}
     .topnav a.icon {
       float: right;
       display: block;
-      margin-top: -15px;
+      margin-top: -10px;
+      color: red;
     }
     .hero-section > .btn-signup {
       padding: 15px 30px;
     }
+    .hero-headline {
+      font-size: 2.2rem;
+    }
+    .hero-text {
+      font-size: 1.1rem;
+    }
+    .copyrights {
+     font-size: 0.8rem;
+    }
+  }
+
+  @media screen and (max-width: 498px) {
+    .hero-headline {
+      font-size: 2.2rem;
+    }
+    
   }
   
   @media screen and (max-width: 443px) {
     .hero-headline {
-      font-size: 4rem;
+      font-size: 2.2rem;
     }
     .hero-section > .btn-signup {
       padding: 15px 20px;
@@ -91,6 +133,21 @@
       margin: 6.5%;
     }
     img{
-      width: 80%;
+      width: 60%;
+    }
+    .content{
+      margin-top: 90px;
+    }
+  }
+
+  @media screen and (max-width: 389px) {
+    .hero-headline {
+      font-size: 2rem;
+    }
+    .hero-text {
+      font-size: 0.7rem;
+    }
+    .hero-img img {
+      height: 350px;
     }
   }

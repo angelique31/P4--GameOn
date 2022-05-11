@@ -151,3 +151,16 @@
       height: 350px;
     }
   }
+
+  @media screen and (max-width: 366px) {
+    .topnav a.icon {
+      margin-top: -40px;
+      color: red;
+    }
+    .hero-headline {
+      font-size: 1.5rem;
+    }
+    .hero-text {
+      font-size: 0.5rem;
+    }
+  }

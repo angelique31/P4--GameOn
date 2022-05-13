@@ -2,16 +2,21 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelector(".close");
 const modalbg = document.querySelector(".bground");
 
-//Open modal
+/**
+ * Fonction pour ouvrir la modale
+ */
 function launchModal() {
-  modalbg.style.display = "block"; /*pour faire apparaitre la modale*/
+  modalbg.style.display = "block"; 
 }
 
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// close modal
+
+/**
+ * Fonction pour fermer la modale
+ */
 function closeModal() {
-  modalbg.style.display = "none"; /*pour faire disparaitre la modale*/
+  modalbg.style.display = "none"; 
 }
 
 closeBtn.addEventListener("click", closeModal);

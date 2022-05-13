@@ -1,3 +1,6 @@
+/**
+ * Fonction de la navbar
+ */
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -7,26 +10,33 @@ function editNav() {
   }
 }
 
-// DOM Elements
+
 const form = document.querySelector("form");
 
-//On pointe le bouton de soumission du formulaire "c'est parti"
+/**
+ * Bouton de soumission du formulaire "c'est parti"
+ */
 const submitInput = form[form.length - 1];
-// console.log(submitInput)
 
-//On pointe les inputs
+
+/**
+ * On point les inputs par leur id
+ */
 const inputs = document.querySelectorAll(
   "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
 
-/********************For each*************/
-//On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
+
+
+/**
+ * Fonction qui permet d'évoluer dans chacun des inputs
+ * @param {*} e - object event
+ * @param {*} e.target.value - value de l'input
+ */
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    // console.log (e)
-    // console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
     switch (
-      e.target.id //on voit dans quel input on tape les lettres
+      e.target.id 
     ) {
       case "first":
         firstChecker(e.target.value);
@@ -51,9 +61,9 @@ inputs.forEach((input) => {
   });
 });
 
-/*********function firstname (first) ***********/
+
 /**
- * 
+ * function firstname (first)
  * @param {*} value 
  * @returns 
  */
@@ -67,7 +77,7 @@ const firstChecker = (value) => {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
+  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
@@ -76,7 +86,12 @@ const firstChecker = (value) => {
   return isValid;
 };
 
-/*********function name (last) ***********/
+
+/**
+ * function name (last)
+ * @param {*} value 
+ * @returns 
+ */
 const lastChecker = (value) => {
   const lastContainer = document.querySelector(".last-container");
   const errorDisplay = document.querySelector(".last-container > span");
@@ -87,7 +102,7 @@ const lastChecker = (value) => {
     lastContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
+  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     lastContainer.classList.remove("error");
     errorDisplay.textContent = "";
@@ -97,7 +112,12 @@ const lastChecker = (value) => {
   return isValid;
 };
 
-/*********function email ***********/
+
+/**
+ * function email
+ * @param {*} value 
+ * @returns 
+ */
 const emailChecker = (value) => {
   const emailContainer = document.querySelector(".email-container");
   const errorDisplay = document.querySelector(".email-container > span");
@@ -116,8 +136,12 @@ const emailChecker = (value) => {
   return isValid;
 };
 
-/*********function birthdate ***********/
 
+/**
+ * function birthdate
+ * @param {*} value 
+ * @returns 
+ */
 const birthdateChecker = (value) => {
   const birthdateContainer = document.querySelector(".birthdate-container");
   const errorDisplay = document.querySelector(".birthdate-container > span");
@@ -127,7 +151,7 @@ const birthdateChecker = (value) => {
   if (!value) {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
-    //Si on met une date de naissance, on enlève le message d'erreur
+  //Si on met une date de naissance, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
@@ -136,7 +160,12 @@ const birthdateChecker = (value) => {
   return isValid;
 };
 
-/*********function quantity ***********/
+
+/**
+ * function quantity
+ * @param {*} value 
+ * @returns 
+ */
 const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
   const errorDisplay = document.querySelector(".quantity-container > span");
@@ -145,7 +174,7 @@ const quantityChecker = (value) => {
   if (!value) {
     quantityContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer un chiffre.";
-    //Si on met un chiffre compris entre 0 et 99, enlever le message d'erreur et renvoyer true
+  //Si on met un chiffre compris entre 0 et 99, enlever le message d'erreur et renvoyer true
   } else {
     errorDisplay.textContent = "";
     isValid = true;
@@ -154,8 +183,11 @@ const quantityChecker = (value) => {
   return isValid;
 };
 
-/*************checkbox************* */
 
+/**
+ * function checkbox
+ * @returns 
+ */
 const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
   const radios = document.querySelectorAll('input[name = "location"]');
@@ -181,8 +213,11 @@ const checkboxContainer = () => {
   return isValid;
 };
 
-/**********cgv checked*************/
 
+/**
+ * function checkbox cgv
+ * @returns 
+ */
 const checkboxChecker = () => {
   const errorDisplay = document.querySelector(".formData > div");
   const check = document.querySelector(".checkbox1");
@@ -195,7 +230,7 @@ const checkboxChecker = () => {
     check.classList.add("error");
     errorDisplay.textContent =
       "Vous devez vérifier que vous acceptez les termes et conditions.";
-    //Si la chekbox des CGU est cochée, on enlève le message d'erreur
+  //Si la chekbox des CGU est cochée, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
@@ -243,7 +278,6 @@ const onSubmit = (e) => {
           currentValue = inputs[i].value;
         }
         data.push(currentValue);
-        console.log(currentValue)
       }
       
       // On pointe les 6 villes :

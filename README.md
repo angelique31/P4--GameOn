@@ -31,9 +31,12 @@ Conserver les données du formulaire (ne pas effacer le formulaire) lorsqu'il ne
 
 - La modale se ferme au clic sur la croix
 
+## Lien du projet terminé :  
+
 Vous pouvez consulter mon projet en cliquant sur ce lien : https://angelique31.github.io/gameOn-p4/
 
-Validation au W3C du projet :
+## Validation au W3C du projet :    
+
 ![image](https://user-images.githubusercontent.com/93211301/168281905-35f942d8-6aab-42a4-9440-245ff97d7b1b.png)
 
 

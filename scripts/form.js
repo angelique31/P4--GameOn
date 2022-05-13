@@ -23,7 +23,7 @@ const inputs = document.querySelectorAll(
 //On créé un for each pour pointer tous les inputs et pour évoluer dans chacun d'eux
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    console.log (e)
+    // console.log (e)
     // console.log(e.target.value); //C'est ce qui est tapé dans l'input en temps réel
     switch (
       e.target.id //on voit dans quel input on tape les lettres
@@ -52,6 +52,11 @@ inputs.forEach((input) => {
 });
 
 /*********function firstname (first) ***********/
+/**
+ * 
+ * @param {*} value 
+ * @returns 
+ */
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
@@ -159,15 +164,20 @@ const checkboxContainer = () => {
 
   //La boucle s'execute autant de fois qu'il y a de boutons radios
   for (let i = 0; i < radios.length; i++) {
+    // console.log(radios[i])
     if (radios[i].checked) {
       isValid = true;
+      errorDisplay.textContent = "";
+      break;
     } else {
       errorDisplay.textContent = "Veuillez sélectionner un choix.";
       errorDisplay.style.color = "red";
       errorDisplay.style.fontSize = "0.6em";
+
     }
     // console.log(radios[i])
   }
+  console.log(isValid);
   return isValid;
 };
 
@@ -212,7 +222,7 @@ const onSubmit = (e) => {
     //La boucle s'execute autant de fois qu'il y a d'inputs
     for (let i = 0; i < inputs.length; i++) {
       //  console.log(i)  //11 inputs
-      // console.log(inputs[i])
+      // console.log(inputs[i].value)
       //On vérifie si au moins une des conditions est vrai avec l'opérateur logique ou ||
       if (
         inputs[i].type === "text" ||
@@ -233,7 +243,9 @@ const onSubmit = (e) => {
           currentValue = inputs[i].value;
         }
         data.push(currentValue);
+        console.log(currentValue)
       }
+      
       // On pointe les 6 villes :
       // console.log(inputs[i].value)
     }
@@ -247,21 +259,41 @@ const onSubmit = (e) => {
    * @returns - bool: true si valid
    */
   const formIsValid = (values) => {
-    let isValid = false;
+    let validInputs = [];
 
     // On indique si la valeur de l'input est valide ou non, en accédant à la valeur de l'input vià l'index du tableau
-    isValid = firstChecker(values[0]);
-    isValid = lastChecker(values[1]);
-    isValid = emailChecker(values[2]);
-    isValid = birthdateChecker(values[3]);
+    // isValid = firstChecker(values[0]);
+    // isValid = lastChecker(values[1]);
+    // isValid = emailChecker(values[2]);
+    // isValid = birthdateChecker(values[3]);
+    // // console.log(isValid);
+    // isValid = quantityChecker(values[4]);
+    // // console.log(isValid);
+    // isValid = checkboxChecker(values[5]);
+    // // console.log(isValid);
+    // isValid = checkboxContainer();
     // console.log(isValid);
-    isValid = quantityChecker(values[4]);
-    // console.log(isValid);
-    isValid = checkboxChecker(values[5]);
-    // console.log(isValid);
-    isValid = checkboxContainer();
-    console.log(isValid);
 
+    validInputs.push(firstChecker(values[0]));
+    validInputs.push(lastChecker(values[1]));
+    validInputs.push(emailChecker(values[2]));
+    validInputs.push(birthdateChecker(values[3]));
+    validInputs.push(quantityChecker(values[4]));
+    validInputs.push(checkboxChecker(values[5]));
+    validInputs.push(checkboxContainer());
+    
+    console.log(validInputs);
+
+    let isValid = true;
+  
+   for (let i = 0; i < validInputs.length; i++) {
+      if(validInputs[i] === false) {
+        isValid = false;
+        break;
+      }
+     
+   }
+      
     //isValid est true si toutes les fonctions renvoient true
     return isValid;
   };
@@ -278,5 +310,5 @@ const onSubmit = (e) => {
 };
 
 submitInput.addEventListener("click", (e) => onSubmit(e));
-// console.log(submitInput)
-// console.log(onSubmit)
+// console.log(submitInput);
+// console.log(onSubmit);

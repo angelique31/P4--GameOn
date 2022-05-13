@@ -5,12 +5,15 @@ const btnSubmitConfirm = document.querySelector(".btn-submit-confirm");
 
 
 //Faire apparaitre la modale de confirmation d'inscription
-function launchModal1() {
+/**
+ * @requires
+ */
+function launchModal() {
     modalConfirmation.style.display = "block";
     spanValidModal.innerHTML = "Merci pour <br> votre inscription";
   }
   
-  btnSubmit.addEventListener("click", launchModal1);
+  btnSubmit.addEventListener("click", launchModal);
 
   // close modal
 function closeModal() {

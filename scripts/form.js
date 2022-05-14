@@ -76,7 +76,7 @@ const firstChecker = (value) => {
   if (value.length < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
-      "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+      "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
   // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";

@@ -65,24 +65,21 @@ inputs.forEach((input) => {
 /**
  * function firstname (first)
  * @param {*} value 
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const firstChecker = (value) => {
   const firstContainer = document.querySelector(".first-container");
   const errorDisplay = document.querySelector(".first-container > span");
   let isValid = false;
 
-  //Si le prénom fait moins de 2 caractères, on met un message d'erreur
   if (value.length < 2) {
     firstContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
-  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
-  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -90,25 +87,22 @@ const firstChecker = (value) => {
 /**
  * function name (last)
  * @param {*} value 
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const lastChecker = (value) => {
   const lastContainer = document.querySelector(".last-container");
   const errorDisplay = document.querySelector(".last-container > span");
   let isValid = false;
 
-  //Si le nom fait moins de 2 caractères, on met un message d'erreur
   if (value.length < 2) {
     lastContainer.classList.add("error");
     errorDisplay.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-  // Si au moins 2 caractères sont tapés, on enlève le message d'erreur
   } else {
     lastContainer.classList.remove("error");
     errorDisplay.textContent = "";
     isValid = true;
   }
-  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -116,23 +110,20 @@ const lastChecker = (value) => {
 /**
  * function email
  * @param {*} value 
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const emailChecker = (value) => {
   const emailContainer = document.querySelector(".email-container");
   const errorDisplay = document.querySelector(".email-container > span");
   let isValid = false;
 
-  //Si ce qui est tapé dans l'input de l'email est différent du regex ci dessous, on affiche un message d'erreur
   if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
     emailContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une adresse mail valide.";
   } else {
-    //Si ce qui est tapé dans l'input de l'email correspond au regex ci dessus, on enlève le message d'erreur
     errorDisplay.textContent = "";
     isValid = true;
   }
-  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -140,23 +131,20 @@ const emailChecker = (value) => {
 /**
  * function birthdate
  * @param {*} value 
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const birthdateChecker = (value) => {
   const birthdateContainer = document.querySelector(".birthdate-container");
   const errorDisplay = document.querySelector(".birthdate-container > span");
   let isValid = false;
 
-  //Si aucune date de naissance n'est affichée, on affiche le message d'erreur
   if (!value) {
     birthdateContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer une date de naissance.";
-  //Si on met une date de naissance, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
-  //IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -164,39 +152,33 @@ const birthdateChecker = (value) => {
 /**
  * function quantity
  * @param {*} value 
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
   const errorDisplay = document.querySelector(".quantity-container > span");
   let isValid = false;
-  //Si on ne met aucunes valeures dans l'input, faire apparaitre un message d'erreur, et renvoyer false
   if (!value) {
     quantityContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer un chiffre.";
-  //Si on met un chiffre compris entre 0 et 99, enlever le message d'erreur et renvoyer true
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
-  // IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
 
 /**
  * function checkbox
- * @returns 
+ * @returns - true pour la soumission du formulaire
  */
 const checkboxContainer = () => {
   const errorDisplay = document.querySelector(".formData > small");
   const radios = document.querySelectorAll('input[name = "location"]');
-  // console.log(radios)
   isValid = false;
 
-  //La boucle s'execute autant de fois qu'il y a de boutons radios
   for (let i = 0; i < radios.length; i++) {
-    // console.log(radios[i])
     if (radios[i].checked) {
       isValid = true;
       errorDisplay.textContent = "";
@@ -207,9 +189,7 @@ const checkboxContainer = () => {
       errorDisplay.style.fontSize = "0.6em";
 
     }
-    // console.log(radios[i])
   }
-  console.log(isValid);
   return isValid;
 };
 
@@ -223,19 +203,15 @@ const checkboxChecker = () => {
   const check = document.querySelector(".checkbox1");
   const checkbox1 = document.querySelector("#checkbox1");
   let isValid = false;
-  // console.log(checkbox1);
 
-  //Si la checkbox des CGU n'est pas cochée, on affiche le message d'erreur
   if (!checkbox1.checked) {
     check.classList.add("error");
     errorDisplay.textContent =
       "Vous devez vérifier que vous acceptez les termes et conditions.";
-  //Si la chekbox des CGU est cochée, on enlève le message d'erreur
   } else {
     errorDisplay.textContent = "";
     isValid = true;
   }
-  // IsValid devient true pour la soumission du formulaire
   return isValid;
 };
 
@@ -282,6 +258,9 @@ const onSubmit = (e) => {
    * @returns - bool: true si valid
    */
   const formIsValid = (values) => {
+    /**
+     * @type boolean
+     */
     let validInputs = [];
 
     validInputs.push(firstChecker(values[0]));
@@ -304,8 +283,6 @@ const onSubmit = (e) => {
     }
     return isValid;
   };
-  // console.log("formValue", formValues(inputs));
-  // console.log("formIsValid", formIsValid(formValues(inputs)));
 
   // si Valid
   if (formIsValid(formValues(inputs))) {

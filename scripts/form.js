@@ -253,24 +253,17 @@ const onSubmit = (e) => {
    */
   const formValues = (inputs) => {
     let data = [];
-
-    //La boucle s'execute autant de fois qu'il y a d'inputs
+    
     for (let i = 0; i < inputs.length; i++) {
-      //  console.log(i)  //11 inputs
-      // console.log(inputs[i].value)
-      //On vérifie si au moins une des conditions est vrai avec l'opérateur logique ou ||
       if (
         inputs[i].type === "text" ||
         inputs[i].type === "email" ||
         inputs[i].type === "date" ||
         inputs[i].type === "number"
       ) {
-        // On ajoute la valeur des inputs à la fin du tableau nommé data grâce à la méthode .push
         data.push(inputs[i].value);
-        // console.log(inputs[i].value);
       }
 
-      
       if (inputs[i].type === "checkbox") {
         let currentValue = "";
         
@@ -279,11 +272,7 @@ const onSubmit = (e) => {
         }
         data.push(currentValue);
       }
-      
-      // On pointe les 6 villes :
-      // console.log(inputs[i].value)
     }
-    //on retourne un tableau 
     return data;
   };
   
@@ -294,19 +283,6 @@ const onSubmit = (e) => {
    */
   const formIsValid = (values) => {
     let validInputs = [];
-
-    // On indique si la valeur de l'input est valide ou non, en accédant à la valeur de l'input vià l'index du tableau
-    // isValid = firstChecker(values[0]);
-    // isValid = lastChecker(values[1]);
-    // isValid = emailChecker(values[2]);
-    // isValid = birthdateChecker(values[3]);
-    // // console.log(isValid);
-    // isValid = quantityChecker(values[4]);
-    // // console.log(isValid);
-    // isValid = checkboxChecker(values[5]);
-    // // console.log(isValid);
-    // isValid = checkboxContainer();
-    // console.log(isValid);
 
     validInputs.push(firstChecker(values[0]));
     validInputs.push(lastChecker(values[1]));
@@ -325,10 +301,7 @@ const onSubmit = (e) => {
         isValid = false;
         break;
       }
-     
-   }
-      
-    //isValid est true si toutes les fonctions renvoient true
+    }
     return isValid;
   };
   // console.log("formValue", formValues(inputs));
@@ -339,10 +312,11 @@ const onSubmit = (e) => {
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".formConfirmation").style.display = "block";
   } else {
+    document.querySelector(".modal-body").style.display = "block";
     document.querySelector(".formConfirmation").style.display = "none";
   }
 };
 
 submitInput.addEventListener("click", (e) => onSubmit(e));
-// console.log(submitInput);
-// console.log(onSubmit);
+
+

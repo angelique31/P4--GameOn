@@ -255,10 +255,11 @@ const onSubmit = (e) => {
   /**
    * Vérifie la valeur de chacun des inputs
    * @param {*} values - array: les données du query selector
-   * @returns - bool: true si valid
+   * @returns - boolean: true si valid
    */
   const formIsValid = (values) => {
     /**
+     * Teste la validité de chaque input
      * @type boolean
      */
     let validInputs = [];

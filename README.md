@@ -1,6 +1,6 @@
 # Projet GameOn
 
-Projet n°4 du parcours javascript-react chez OpenClassrooms. L'objectif est de poursuivre un projet de création d’un formulaire d’inscription à des concours de jeux vidéos (voir images ci dessous) :
+Projet n°4 du parcours javascript-react chez OpenClassrooms. L'objectif est de poursuivre un projet de création d’un formulaire d’inscription à des concours de jeux vidéos (voir les maquettes ci dessous) :
 ![image](https://user-images.githubusercontent.com/93211301/168276374-d769b939-1bb6-4cab-89b9-b570ee050f01.png)
 
 ## Spécifications techniques

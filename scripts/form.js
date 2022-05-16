@@ -276,6 +276,7 @@ const onSubmit = (e) => {
     document.querySelector(".formConfirmation").style.display = "block";
   } else {
     document.querySelector(".modal-body").style.display = "block";
+    document.querySelector(".formConfirmation").style.display = "none";
   }
 };
 

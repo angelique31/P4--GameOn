@@ -10,14 +10,12 @@ function editNav() {
   }
 }
 
-
 const form = document.querySelector("form");
 
 /**
  * Bouton de soumission du formulaire "c'est parti"
  */
 const submitInput = form[form.length - 1];
-
 
 /**
  * On point les inputs par leur id
@@ -26,8 +24,6 @@ const inputs = document.querySelectorAll(
   "#first, #last, #email, #birthdate, #quantity, input[name=location] , #checkbox1 "
 );
 
-
-
 /**
  * Fonction qui permet d'évoluer dans chacun des inputs
  * @param {*} e - object event
@@ -35,9 +31,7 @@ const inputs = document.querySelectorAll(
  */
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    switch (
-      e.target.id 
-    ) {
+    switch (e.target.id) {
       case "first":
         firstChecker(e.target.value);
         break;
@@ -61,10 +55,9 @@ inputs.forEach((input) => {
   });
 });
 
-
 /**
  * function firstname (first)
- * @param {*} value 
+ * @param {*} value
  * @returns - true pour la soumission du formulaire
  */
 const firstChecker = (value) => {
@@ -83,10 +76,9 @@ const firstChecker = (value) => {
   return isValid;
 };
 
-
 /**
  * function name (last)
- * @param {*} value 
+ * @param {*} value
  * @returns - true pour la soumission du formulaire
  */
 const lastChecker = (value) => {
@@ -106,10 +98,9 @@ const lastChecker = (value) => {
   return isValid;
 };
 
-
 /**
  * function email
- * @param {*} value 
+ * @param {*} value
  * @returns - true pour la soumission du formulaire
  */
 const emailChecker = (value) => {
@@ -127,10 +118,9 @@ const emailChecker = (value) => {
   return isValid;
 };
 
-
 /**
  * function birthdate
- * @param {*} value 
+ * @param {*} value
  * @returns - true pour la soumission du formulaire
  */
 const birthdateChecker = (value) => {
@@ -148,16 +138,16 @@ const birthdateChecker = (value) => {
   return isValid;
 };
 
-
 /**
  * function quantity
- * @param {*} value 
+ * @param {*} value
  * @returns - true pour la soumission du formulaire
  */
 const quantityChecker = (value) => {
   const quantityContainer = document.querySelector(".quantity-container");
   const errorDisplay = document.querySelector(".quantity-container > span");
   let isValid = false;
+
   if (!value) {
     quantityContainer.classList.add("error");
     errorDisplay.textContent = "Veuillez entrer un chiffre.";
@@ -167,7 +157,6 @@ const quantityChecker = (value) => {
   }
   return isValid;
 };
-
 
 /**
  * function checkbox
@@ -187,16 +176,14 @@ const checkboxContainer = () => {
       errorDisplay.textContent = "Veuillez sélectionner un choix.";
       errorDisplay.style.color = "red";
       errorDisplay.style.fontSize = "0.6em";
-
     }
   }
   return isValid;
 };
 
-
 /**
  * function checkbox cgv
- * @returns 
+ * @returns
  */
 const checkboxChecker = () => {
   const errorDisplay = document.querySelector(".formData > div");
@@ -229,7 +216,7 @@ const onSubmit = (e) => {
    */
   const formValues = (inputs) => {
     let data = [];
-    
+
     for (let i = 0; i < inputs.length; i++) {
       if (
         inputs[i].type === "text" ||
@@ -242,7 +229,7 @@ const onSubmit = (e) => {
 
       if (inputs[i].type === "checkbox") {
         let currentValue = "";
-        
+
         if (inputs[i].checked) {
           currentValue = inputs[i].value;
         }
@@ -251,7 +238,7 @@ const onSubmit = (e) => {
     }
     return data;
   };
-  
+
   /**
    * Vérifie la valeur de chacun des inputs
    * @param {*} values - array: les données du query selector
@@ -271,13 +258,11 @@ const onSubmit = (e) => {
     validInputs.push(quantityChecker(values[4]));
     validInputs.push(checkboxChecker(values[5]));
     validInputs.push(checkboxContainer());
-    
-    console.log(validInputs);
 
     let isValid = true;
-  
-   for (let i = 0; i < validInputs.length; i++) {
-      if(validInputs[i] === false) {
+
+    for (let i = 0; i < validInputs.length; i++) {
+      if (validInputs[i] === false) {
         isValid = false;
         break;
       }
@@ -291,10 +276,7 @@ const onSubmit = (e) => {
     document.querySelector(".formConfirmation").style.display = "block";
   } else {
     document.querySelector(".modal-body").style.display = "block";
-    document.querySelector(".formConfirmation").style.display = "none";
   }
 };
 
 submitInput.addEventListener("click", (e) => onSubmit(e));
-
-

@@ -7,7 +7,7 @@ const btnSubmitConfirm = document.querySelector(".btn-submit-confirm");
 /**
  * Fonction pour ouvrir la modale de confirmation d'inscription
  */
-function launchModal1() {
+function launchModalConfirmation() {
     modalConfirmation.style.display = "block";
     spanValidModal.innerHTML = "Merci pour <br> votre inscription";
   }
@@ -17,8 +17,9 @@ function launchModal1() {
   /**
    * Fonction pour fermer la modale de confirmation d'inscription
    */
-function closeModal1() {
+function closeModalConfirmation() {
   modalbg.style.display = "none"; 
+  window.location.reload();
 }
 
 btnSubmitConfirm.addEventListener("click", closeModal1);
